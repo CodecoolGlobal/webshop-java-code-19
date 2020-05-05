@@ -26,6 +26,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <script src="/static/js/cart.js" defer ></script>
 </head>
 
 <body>
@@ -52,7 +53,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="cart/add/id" th:attr="href='/cart/add/' + ${prod.id}">Add to cart</a>
+                        <a class="btn btn-success"   href="#" onclick="" th:onclick="'addToCart(\'' + ${prod.id} + '\');'">Add to cart</a>
                     </div>
                 </div>
             </div>
