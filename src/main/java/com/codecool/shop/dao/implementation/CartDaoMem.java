@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.model.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CartDaoMem {
@@ -27,6 +28,19 @@ public class CartDaoMem {
         }
         return instance;
     }
+    public HashMap<Product, Integer> prepareCartForDisplay() {
+        HashMap<Product, Integer> preparedCart = new HashMap<Product, Integer>();
 
+        for (Product item : order) {
+            if (preparedCart.containsKey(item)) {
+                int number = preparedCart.get(item);
+                preparedCart.put(item, number + 1);
+            } else {
+                preparedCart.put(item, 1);
+            }
+
+        }
+        return preparedCart;
+    }
 
 }

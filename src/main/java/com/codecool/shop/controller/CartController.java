@@ -19,13 +19,15 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CartDaoMem cart = CartDaoMem.getInstance();
 //        ProductDao productDataStore = ProductDaoMem.getInstance();
+          String id = req.getParameter("id");
+          System.out.println(id);
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 //        context.setVariable("category", productCategoryDataStore.find(1));
 //        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         engine.process("cart/cart.html", context, resp.getWriter());
     }
+
 
 }
