@@ -7,7 +7,6 @@ function addToCart(productId) {
 
 function addToDiv(data) {
     let orderedItems = data["orderedItems"];
-    console.log(orderedItems);
     document.getElementById("cart-badge").setAttribute("value", orderedItems);
 }
 
