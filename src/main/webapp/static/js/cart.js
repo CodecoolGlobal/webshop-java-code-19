@@ -1,5 +1,7 @@
 function addToCart(productId) {
-    fetch("/cart?id=" + productId)
+    fetch(`/cart?id=${productId}`, {
+        method : 'POST'
+    } )
         .then( response => response.json())
         .then(data => addToDiv(data));
 

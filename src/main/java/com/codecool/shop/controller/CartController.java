@@ -21,14 +21,26 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CartDaoMem cart = CartDaoMem.getInstance();
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("products",cart.getOrder());
+
+
+        engine.process("cart/cart.html", context, resp.getWriter());
+//    generate the template send to the doGet()
+//    js -> eventListener to the buttons
+
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CartDaoMem cart = CartDaoMem.getInstance();
         ProductDaoMem product = ProductDaoMem.getInstance();
         String id = req.getParameter("id");
         cart.addToCart(product.find(Integer.parseInt(id)));
         int orderedItems = cart.getOrder().size();
         resp.setContentType("application/json");
         resp.getWriter().write("{\"orderedItems\":"+orderedItems+"}");
-
     }
-
-
 }
