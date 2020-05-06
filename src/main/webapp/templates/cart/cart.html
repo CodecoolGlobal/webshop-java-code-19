@@ -39,20 +39,15 @@
     </div>
 
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="cartitem,iterStat : ${cartItems}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${cartitem.getProduct().getId()} + '.jpg'" alt="" />
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+                    <h4 class="card-title" th:text="${cartitem.getProduct().getName()}">Product name</h4>
+                    <h4 class="card-title" th:text="${cartitem.getQuantity()}">Product name</h4>
                 </div>
                 <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" href="/cart/add/id" th:attr="href='/cart/add/' + ${prod.id}">Add to cart</a>
-                    </div>
+
                 </div>
             </div>
         </div>
