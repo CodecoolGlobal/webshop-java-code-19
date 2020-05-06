@@ -27,6 +27,7 @@ public class CartController extends HttpServlet {
         int orderedItems = cart.getOrder().size();
         resp.setContentType("application/json");
         resp.getWriter().write("{\"orderedItems\":"+orderedItems+"}");
+
     }
 
 

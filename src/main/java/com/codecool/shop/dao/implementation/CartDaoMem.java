@@ -28,19 +28,5 @@ public class CartDaoMem {
         }
         return instance;
     }
-    public HashMap<Product, Integer> prepareCartForDisplay() {
-        HashMap<Product, Integer> preparedCart = new HashMap<Product, Integer>();
-
-        for (Product item : order) {
-            if (preparedCart.containsKey(item)) {
-                int number = preparedCart.get(item);
-                preparedCart.put(item, number + 1);
-            } else {
-                preparedCart.put(item, 1);
-            }
-
-        }
-        return preparedCart;
-    }
 
 }
