@@ -15,15 +15,18 @@
                     <h4 class="card-title" th:text="${cartitem.getProduct().getName()}">Product name</h4>
                 </div>
                 <div class="card-body">
-                    <h5 style="display: inline">quantity: </h5>
-                    <h5 style="display: inline" class="card-title" id="lel" th:text="${cartitem.getQuantity()}"
-                        th:attr="id='product-q-'+${cartitem.getProduct().getId()}">Product quantity</h5>
+                    <div class="card-text">
+                        <h6 class="lead" style="display: inline">quantity: </h6>
+                        <h6 style="display: inline" id="lel" th:text="${cartitem.getQuantity()}"
+                            th:attr="id='product-q-'+${cartitem.getProduct().getId()}">1</h6>
+                    </div>
                     <br>
-                    <br>
-                    <h5 style="display: inline">price: </h5>
-                    <h5 style="display: inline" class="card-title" th:text="${cartitem.getSubTotalPrice()}" id=" "
-                        th:attr="id='product-sub-'+${cartitem.getProduct().getId()}">Subtotal</h5>
-                    <br>
+                    <div class="card-text">
+                        <h6 class="lead" style="display: inline">price: </h6>
+                        <h6 style="display: inline" th:text="${cartitem.getSubTotalPrice()}" id=" "
+                            th:attr="id='product-sub-'+${cartitem.getProduct().getId()}">Subtotal Price</h6>
+                        <h6 class="lead" style="display: inline">USD</h6>
+                    </div>
                     <br>
                     <a class="btn btn-success" href='javascript:void();' onclick=""
                        th:onclick="'modifyCart(\'remove\',\'' + ${cartitem.getProduct().getId()} + '\');'">Remove from

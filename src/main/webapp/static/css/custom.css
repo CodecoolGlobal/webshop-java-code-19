@@ -62,27 +62,27 @@
 }
 
 .badge:after{
-    content:attr(value);
-    font-size:12px;
+    content: attr(value);
+    font-size: 12px;
     background: #eeeeee;
-    border-radius:50%;
-    padding:3px;
-    position:relative;
-    left:-8px;
-    top:-10px;
-    opacity:0.9;
+    border-radius: 50%;
+    padding: 3px;
+    position: relative;
+    left: -8px;
+    top: -10px;
+    opacity: 0.9;
 }
 
 body {
     background-color: #eeeeee;
 }
 
-.card{
+.card {
     margin: 10px;
     padding: 10px;
 }
 
-.btn{
+.btn {
     background-color: darkgreen;
 }
 
