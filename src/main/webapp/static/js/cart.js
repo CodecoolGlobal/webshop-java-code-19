@@ -1,5 +1,7 @@
 function addToCart(productId) {
-    fetch("/cart?id=" + productId)
+    fetch(`/cart?id=${productId}`, {
+        method : 'POST'
+    } )
         .then( response => response.json())
         .then(data => addToDiv(data));
 
@@ -7,7 +9,6 @@ function addToCart(productId) {
 
 function addToDiv(data) {
     let orderedItems = data["orderedItems"];
-    console.log(orderedItems);
     document.getElementById("cart-badge").setAttribute("value", orderedItems);
 }
 
