@@ -35,23 +35,49 @@ public class CartController extends HttpServlet {
         engine.process("cart/cart.html", context, resp.getWriter());
     }
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
         CartDaoMem cartDao = CartDaoMem.getInstance();
         ProductDaoMem productDao = ProductDaoMem.getInstance();
         String id = req.getParameter("id");
         int productId = Integer.parseInt(id);
         Product product = productDao.find(productId);
         CartItem cartItem = cartDao.find(productId);
-        if (cartItem == null) {
-            cartDao.addToCart(new CartItem(1, product));
-        } else {
-            cartItem.changeQuantity(1);
-        }
-        int orderedItemsCount = cartItem.getOrderedItemsCount(cartDao.getProducts());
+        int orderedItemsCount = 0;
+        switch (action){
+            case "add":
+                if (cartItem == null) {
+                   cartItem = new CartItem(1, product);
+                    cartDao.addToCart(cartItem);
+                } else {
+                    cartItem.changeQuantity(1);
+                }
+                orderedItemsCount = cartItem.getOrderedItemsCount(cartDao.getProducts());
 
-        resp.setContentType("application/json");
-        resp.getWriter().write("{\"orderedItems\":" + orderedItemsCount + "}");
+                resp.setContentType("application/json");
+                resp.getWriter().write("{\"orderedItems\":" + orderedItemsCount + "}");
+                break;
+            case "remove":
+                if (cartItem.getQuantity() == 1 ){
+                    cartDao.removeFromCart(cartItem);
+                    orderedItemsCount = 0;
+                }
+                else if ( cartItem != null ){
+                    cartItem.changeQuantity(-1);
+                    orderedItemsCount = cartItem.getQuantity();
+                }
+                float totalPrice = 0;
+                for (CartItem product2 : cartDao.getProducts()) {
+                    totalPrice += product2.getSubTotalPrice();
+                }
+                resp.setContentType("application/json");
+                resp.getWriter().write("{\"orderedItems\":" + orderedItemsCount + ",\"totalPrice\":" + totalPrice + ",\"subTotalPrice\":" + cartItem.getSubTotalPrice() + "}");
+                break;
+            default:
+                break;
+        }
     }
 }
 
