@@ -15,9 +15,19 @@
                     <h4 class="card-title" th:text="${cartitem.getProduct().getName()}">Product name</h4>
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title" id="lel" th:text="${cartitem.getQuantity()}" th:attr="id='product-q-'+${cartitem.getProduct().getId()}">Product quantity</h4>
-                    <a class="btn btn-success"   href='javascript:void();' onclick="" th:onclick="'modifyCart(\'remove\',\'' + ${cartitem.getProduct().getId()} + '\');'">Remove from cart</a>
-                    <h4 class="card-title" th:text="${cartitem.getSubTotalPrice()}" id=" " th:attr="id='product-sub-'+${cartitem.getProduct().getId()}">Subtotal</h4>
+                    <h5 style="display: inline">quantity: </h5>
+                    <h5 style="display: inline" class="card-title" id="lel" th:text="${cartitem.getQuantity()}"
+                        th:attr="id='product-q-'+${cartitem.getProduct().getId()}">Product quantity</h5>
+                    <br>
+                    <br>
+                    <h5 style="display: inline">price: </h5>
+                    <h5 style="display: inline" class="card-title" th:text="${cartitem.getSubTotalPrice()}" id=" "
+                        th:attr="id='product-sub-'+${cartitem.getProduct().getId()}">Subtotal</h5>
+                    <br>
+                    <br>
+                    <a class="btn btn-success" href='javascript:void();' onclick=""
+                       th:onclick="'modifyCart(\'remove\',\'' + ${cartitem.getProduct().getId()} + '\');'">Remove from
+                        cart</a>
                 </div>
             </div>
         </div>

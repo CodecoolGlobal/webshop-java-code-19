@@ -64,11 +64,28 @@
 .badge:after{
     content:attr(value);
     font-size:12px;
-    background: deepskyblue;
+    background: #eeeeee;
     border-radius:50%;
     padding:3px;
     position:relative;
     left:-8px;
     top:-10px;
     opacity:0.9;
+}
+
+body {
+    background-color: #eeeeee;
+}
+
+.card{
+    margin: 10px;
+    padding: 10px;
+}
+
+.btn{
+    background-color: darkgreen;
+}
+
+#cart-badge {
+    color: black;
 }
