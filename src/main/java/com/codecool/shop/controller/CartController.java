@@ -23,10 +23,15 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CartDaoMem cart = CartDaoMem.getInstance();
+//        CartItem cartItem = cart.find();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("cartItems", cart.getProducts());
-//        context.setVariable("subTotalPrice", );
+        float totalPrice = 0;
+        for (CartItem product : cart.getProducts()) {
+            totalPrice += product.getSubTotalPrice();
+        }
+        context.setVariable("totalPrice", totalPrice);
         engine.process("cart/cart.html", context, resp.getWriter());
     }
 

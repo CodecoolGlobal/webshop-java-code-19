@@ -14,11 +14,13 @@ public class CartItem {
     public int getOrderedItemsCount(List<CartItem> data) {
         int orderedItemsCount = 0;
         for (CartItem cartitem : data) {
-//            float subTotalPrice = cartitem.getProduct().getDefaultPrice() * cartitem.getQuantity();
             orderedItemsCount += cartitem.getQuantity();
-//            totalPrice += subTotalPrice;
         }
         return orderedItemsCount;
+    }
+
+    public float getSubTotalPrice() {
+        return this.getProduct().getDefaultPrice() * this.getQuantity();
     }
 
     public int getQuantity() {
