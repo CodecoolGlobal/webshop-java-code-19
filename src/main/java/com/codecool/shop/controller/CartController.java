@@ -26,6 +26,7 @@ public class CartController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("cartItems", cart.getProducts());
+//        context.setVariable("subTotalPrice", );
         engine.process("cart/cart.html", context, resp.getWriter());
     }
 
@@ -42,13 +43,8 @@ public class CartController extends HttpServlet {
         } else {
             cartItem.changeQuantity(1);
         }
-        int orderedItemsCount = 0;
-        float totalPrice = 0;
-        for (CartItem cartitem : cartDao.getProducts()) {
-            float subTotalPrice = cartitem.getProduct().getDefaultPrice() * cartitem.getQuantity();
-            orderedItemsCount += cartitem.getQuantity();
-            totalPrice += subTotalPrice;
-        }
+        int orderedItemsCount = cartItem.getOrderedItemsCount(cartDao.getProducts());
+
         resp.setContentType("application/json");
         resp.getWriter().write("{\"orderedItems\":" + orderedItemsCount + "}");
     }

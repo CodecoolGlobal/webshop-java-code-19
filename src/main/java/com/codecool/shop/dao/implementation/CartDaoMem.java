@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CartDaoMem {
     private static CartDaoMem instance = null;
-//    private List<Product> order = new ArrayList<>();
     private List<CartItem> data = new ArrayList<>();
 
     public CartDaoMem(){
