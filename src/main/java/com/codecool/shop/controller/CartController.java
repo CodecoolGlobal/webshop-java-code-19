@@ -23,10 +23,15 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CartDaoMem cart = CartDaoMem.getInstance();
-//        CartItem cartItem = cart.find();
+        CartItem cartItem = cart.find(1);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("cartItems", cart.getProducts());
+        int orderedItemsCount = 0;
+        if (!cart.getProducts().isEmpty()){
+         orderedItemsCount = cartItem.getOrderedItemsCount(cart.getProducts());
+        }
+        context.setVariable("orderedItems", orderedItemsCount);
         float totalPrice = 0;
         for (CartItem product : cart.getProducts()) {
             totalPrice += product.getSubTotalPrice();
@@ -76,6 +81,7 @@ public class CartController extends HttpServlet {
                 resp.getWriter().write("{\"orderedItems\":" + orderedItemsCount + ",\"totalPrice\":" + totalPrice + ",\"subTotalPrice\":" + cartItem.getSubTotalPrice() + "}");
                 break;
             default:
+
                 break;
         }
     }

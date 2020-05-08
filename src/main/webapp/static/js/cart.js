@@ -1,9 +1,16 @@
+function errorHandling(error) {
+    console.error(error);
+}
+
 function modifyCart(action,productId) {
-    fetch(`/cart?action=${action}&id=${productId}`, {
-        method : 'POST'
+    fetch(`/cart`, {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded',},
+        body : `action=${action}&id=${productId}`,
     } )
         .then( response => response.json())
-        .then(data => modifyDiv(action, data, productId));
+        .then(data => modifyDiv(action, data, productId))
+        .catch(error => errorHandling(error));
 
 }
 

@@ -15,7 +15,7 @@
                     <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a id="cart-badge" class="fa badge" style="font-size:30px" value=0 href="/cart">&#xf07a;</a>
+                    <a id="cart-badge" th:attr="value=${orderedItems}" class="fa badge" style="font-size:30px" value=0 href="/cart">&#xf07a;</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Login</a>
