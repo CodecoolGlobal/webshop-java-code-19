@@ -18,6 +18,7 @@ public class CartDaoMem {
     public void addToCart(CartItem product){
         data.add(product);
     }
+
     public void  removeFromCart(CartItem product){
         data.remove(product);
     }
