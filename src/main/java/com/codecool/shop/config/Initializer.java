@@ -13,6 +13,7 @@ import com.codecool.shop.config.ConnectionUtil;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.sql.SQLException;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -22,9 +23,6 @@ public class Initializer implements ServletContextListener {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-
-        ConnectionUtil.App app = new ConnectionUtil.App();
-        app.connect();
 
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");

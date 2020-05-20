@@ -1,10 +1,11 @@
 package com.codecool.shop.config;
-import javax.servlet.http.HttpServlet;
+import org.postgresql.ds.PGSimpleDataSource;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionUtil extends HttpServlet {
+public class ConnectionUtil {
     public static class App {
 
         private final String url = "jdbc:postgresql://localhost/codecoolshop";
@@ -26,5 +27,12 @@ public class ConnectionUtil extends HttpServlet {
             }
             return conn;
         }
+
+        //ALTERNATIVE
+        //PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        //dataSource.setUser(environments.get("APP_DB_USER_NAME"));
+        //dataSource.setPassword(environments.get("APP_DB_PASSWORD"));
+        //dataSource.setDatabaseName(dbName);
+        //return dataSource;
     }
 }
