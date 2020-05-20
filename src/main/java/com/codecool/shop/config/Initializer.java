@@ -1,5 +1,6 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.dao.JDBC.SupplierDaoJdbc;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
@@ -22,6 +23,15 @@ public class Initializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ConnectionUtil connectionUtil = new ConnectionUtil();
+        SupplierDao supplierDataStore2 = null;
+        try {
+            supplierDataStore2 = new SupplierDaoJdbc(connectionUtil.connect());
+            System.out.println(supplierDataStore2.getAll());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
