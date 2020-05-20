@@ -16,10 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -28,11 +31,11 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //CONNECTION TEST
-        ConnectionUtil.App app = new ConnectionUtil.App();
-        app.connect();
         try {
-            app.connect().createStatement();
-            app.connect().close();
+            DataSource dataSource = new ConnectionUtil().connect();
+            Connection connection = dataSource.getConnection();
+            connection.createStatement();
+            connection.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
