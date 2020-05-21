@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.ConnectionUtil;
 import com.codecool.shop.dao.JDBC.ProductCategoryDaoJdbc;
+import com.codecool.shop.dao.JDBC.ProductDaoJdbc;
 import com.codecool.shop.dao.JDBC.SupplierDaoJdbc;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -48,19 +49,20 @@ public class ProductController extends HttpServlet {
 
         ConnectionUtil connectionUtil = new ConnectionUtil();
         ProductCategoryDao productCategoryDataStore = null;
+        ProductDao productDataStore = null;
         try {
             productCategoryDataStore = new ProductCategoryDaoJdbc(connectionUtil.connect());
+            productDataStore = new ProductDaoJdbc(connectionUtil.connect());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         CartDaoMem cart = CartDaoMem.getInstance();
         CartItem cartItem = cart.find(1);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("category", productCategoryDataStore.find(1));
         // TODO need fixing this line
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        context.setVariable("products", productDataStore.getAll());
         int orderedItemsCount = 0;
         if (!cart.getProducts().isEmpty()){
             orderedItemsCount = cartItem.getOrderedItemsCount(cart.getProducts());}

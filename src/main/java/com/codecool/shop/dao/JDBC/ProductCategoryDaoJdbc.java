@@ -2,7 +2,6 @@ package com.codecool.shop.dao.JDBC;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class ProductCategoryDaoJdbc implements ProductCategoryDao {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     public ProductCategoryDaoJdbc(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -37,7 +36,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
                 String name = rs.getString("name");
                 String department = rs.getString("department");
                 String description = rs.getString("description");
-                ProductCategory productCategory = new ProductCategory(name,department, description);
+                ProductCategory productCategory = new ProductCategory(name, department, description);
                 productCategory.setId(dbID);
                 return productCategory;
             }
@@ -56,7 +55,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     public List<ProductCategory> getAll() {
         List<ProductCategory> productCategories = new ArrayList<>();
         Statement stmt;
-        String query = "SELECT id, name,department, description FROM product_categories";
+        String query = "SELECT id, name,department, description FROM product_categories ";
         try (Connection con = dataSource.getConnection()) {
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -65,7 +64,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
                 String name = rs.getString("name");
                 String department = rs.getString("department");
                 String description = rs.getString("description");
-                ProductCategory productCategory = new ProductCategory(name,department,description);
+                ProductCategory productCategory = new ProductCategory(name, department, description);
                 productCategory.setId(id);
                 productCategories.add(productCategory);
             }
