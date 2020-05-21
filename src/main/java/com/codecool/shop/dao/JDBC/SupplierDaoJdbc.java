@@ -28,6 +28,23 @@ public class SupplierDaoJdbc implements SupplierDao {
 
     @Override
     public Supplier find(int id) {
+
+        Statement stmt;
+        String query = "SELECT id, name, description FROM suppliers WHERE id =" + id + ";";
+        try (Connection con = dataSource.getConnection()) {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int dbID = rs.getInt("id");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                Supplier supplier = new Supplier(name, description);
+                supplier.setId(dbID);
+                return supplier;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 
