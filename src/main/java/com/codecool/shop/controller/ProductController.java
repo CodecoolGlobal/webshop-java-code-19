@@ -53,6 +53,8 @@ public class ProductController extends HttpServlet {
         try {
             productCategoryDataStore = new ProductCategoryDaoJdbc(connectionUtil.connect());
             productDataStore = new ProductDaoJdbc(connectionUtil.connect());
+            ((ProductDaoJdbc) productDataStore).setProductCategoryDataStore(new ProductCategoryDaoJdbc(connectionUtil.connect()));
+            ((ProductDaoJdbc) productDataStore).setSupplierDataStore(new SupplierDaoJdbc(connectionUtil.connect()));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
