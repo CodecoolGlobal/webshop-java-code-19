@@ -1,9 +1,6 @@
 package com.codecool.shop.config;
 import org.postgresql.ds.PGSimpleDataSource;
-
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionUtil {
@@ -22,7 +19,6 @@ public class ConnectionUtil {
             dataSource.setUser(user);
             dataSource.setPassword(password);
             dataSource.setDatabaseName(database);
-            System.out.println("Connected to the PostgreSQL server successfully.");
             return dataSource;
         }
     }
