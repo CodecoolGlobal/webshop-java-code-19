@@ -1,6 +1,8 @@
 # Codecool Online Shop
 
-Java SE: Web Project skeleton
+This is a webshop app.
+Created in Java SE and PSQL database.
+Frontend in Thymeleaf.
 
 # Install
 
